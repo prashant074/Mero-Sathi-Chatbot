@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChattyAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-screen">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="ChattyAI Logo" class="logo">
+            <h1>Welcome to <span class="brand">Mero Sathi 👋</span></h1>
+            <p>Start chatting with Mero Sathi now. You can ask me anything.</p>
+            <a href="#chatbox" class="start-btn">Start Chat</a>
+        </div>
+
+        <div id="chatbox" class="chat-box">
+            <div class="chat-history">
+                {% for sender, message in chat_history %}
+                    <div class="chat-message {{ 'user' if sender == 'You' else 'bot' }}">
+                        <strong>{{ sender }}:</strong> {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            <form method="POST" class="input-area">
+                <input type="text" name="user_input" placeholder="Ask me anything..." required>
+                <button type="submit">➤</button>
+            </form>
+            <div class="chat-options">
+                <a href="/new_chat">New Chat</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
